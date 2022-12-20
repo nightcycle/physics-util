@@ -1,0 +1,15 @@
+[package]
+name = "nightcycle/package"
+description = "A package!"
+version = "1.0.0"
+authors = ["CJ Oyer <coyer@nightcycle.us>"]
+realm = "shared"
+registry = "https://github.com/upliftgames/wally-index"
+exclude = ["Packages", ".vscode"]
+
+[dependencies]
+ColdFusion = "nightcycle/cold-fusion@4.1.26"
+Math = "nightcycle/luau-math@1.3.1"
+Draw = "nightcycle/draw@^1.0.5"
+Signal = "nightcycle/signal@^1.0.2"
+Maid = "nightcycle/maid@^1.0.4"

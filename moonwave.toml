@@ -1,0 +1,22 @@
+title = "package"  # From Git
+gitRepoUrl = "https://github.com/nightcycle/project" # From Git
+
+gitSourceBranch = "master"
+changelog = true
+classOrder = []
+
+[docusaurus]
+onBrokenLinks = "throw"
+onBrokenMarkdownLinks = "warn"
+favicon = "/"
+
+# From git:
+organizationName = "nightcycle"
+projectName = "project"
+url = "https://nightcycle.github.io"
+baseUrl = "/package/"
+tagline = "because documenting your code is cool"
+
+[footer]
+style = "dark"
+copyright = "Copyright © 2022 Nightcycle Studios. Built with Moonwave and Docusaurus"
