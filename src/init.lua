@@ -386,12 +386,12 @@ function Physics.getCurrent(
 	return resistance / voltage
 end
 
-function Physics.getDragForce(
+function Physics.getDragEnergy(
 	fluidDensity: KilogramsPerCubicMeter,
 	velocity: MetersPerSecond,
 	area: SquareMeter,
 	dragCoefficient: number
-): Newton
+): Joule
 	return 0.5 * fluidDensity * (velocity^2) * dragCoefficient * area
 end
 
@@ -399,7 +399,7 @@ function Physics.getDragCoefficient(
 	fluidDensity: KilogramsPerCubicMeter,
 	velocity: MetersPerSecond,
 	area: SquareMeter,
-	drag: Newton
+	drag: Joule
 ): number
 	return drag / (0.5 * fluidDensity * (velocity^2) * area)
 end
@@ -408,7 +408,7 @@ function Physics.getDragArea(
 	fluidDensity: KilogramsPerCubicMeter,
 	velocity: MetersPerSecond,
 	dragCoefficient: number,
-	drag: Newton
+	drag: Joule
 ): SquareMeter
 	return drag / (0.5 * fluidDensity * (velocity^2) * dragCoefficient)
 end
@@ -417,7 +417,7 @@ function Physics.getDragVelocity(
 	fluidDensity: KilogramsPerCubicMeter,
 	area: SquareMeter,
 	dragCoefficient: number,
-	drag: Newton
+	drag: Joule
 ): MetersPerSecond
 	return (drag / (0.5 * fluidDensity * dragCoefficient * area))^0.5
 end
@@ -426,7 +426,7 @@ function Physics.getDragFluidDensity(
 	velocity: MetersPerSecond,
 	area: SquareMeter,
 	dragCoefficient: number,
-	drag: Newton
+	drag: Joule
 ): KilogramsPerCubicMeter
 	return drag / (0.5 * dragCoefficient * (velocity^2) * dragCoefficient)
 end
@@ -521,6 +521,30 @@ function Physics.getMassFromDeltaTemperatureAndHeatEnergyAndHeatCapacity(
 	heatCapacity: number
 ): Kilogram
 	return heatEnergy / (deltaTemperature * heatCapacity)
+end
+
+function Physics.getTorque(radius: Meter, tangentialForce: Newton): Newton
+	return radius * tangentialForce
+end
+
+function Physics.getTangentialForce(torque: Newton, radius: Meter): Newton
+	return torque / radius
+end
+
+function Physics.getRadiusFromForce(torque: Newton, tangentialForce: Newton): Meter
+	return torque / tangentialForce
+end
+
+function Physics.getAngularMomentum(radius: Meter, tangentialMomentum: Joule): Joule
+	return radius * tangentialMomentum
+end
+
+function Physics.getTangentialMomentum(radius: Meter, angularMomentum: Joule): Joule
+	return angularMomentum / radius
+end
+
+function Physics.getRadiusFromMomentum(radius: Meter, angularMomentum: Joule): Meter
+	return angularMomentum / radius
 end
 
 return Physics
