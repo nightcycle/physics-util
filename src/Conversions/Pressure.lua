@@ -35,6 +35,8 @@ local PASCAL_IN_MEGAPASCAL = KILOPASCAL_IN_MEGAPASCAL*1000
 local BAR_IN_MEGAPASCAL = 10
 local MILLIBAR_IN_MEGAPASCAL = BAR_IN_MEGAPASCAL * 1000
 local POUNDS_PER_SQUARE_INCH_IN_MEGAPASCAL = 145.038
+local ATM_IN_ROBLOX = 101325/1290
+local MEGAPASCAL_IN_ROBLOX = ATM_IN_ROBLOX / ATMOSPHERE_IN_MEGAPASCAL
 
 local Megapascal = {}
 function Megapascal.toAtmosphere(megapascal: Megapascal): Atmosphere
@@ -54,6 +56,9 @@ function Megapascal.toMillibar(megapascal: Megapascal): Millibar
 end
 function Megapascal.toPoundsPerSquareInch(megapascal: Megapascal): PoundsPerSquareInch
 	return megapascal * POUNDS_PER_SQUARE_INCH_IN_MEGAPASCAL
+end
+function Megapascal.toRoblox(megapascal: Megapascal): number
+	return megapascal / MEGAPASCAL_IN_ROBLOX
 end
 
 local Kilopascal = {}
@@ -75,6 +80,9 @@ end
 function Kilopascal.toPoundsPerSquareInch(kilopascal: Kilopascal): PoundsPerSquareInch
 	return Megapascal.toPoundsPerSquareInch(Kilopascal.toMegapascal(kilopascal))
 end
+function Kilopascal.toRoblox(kilopascal: Kilopascal): PoundsPerSquareInch
+	return Megapascal.toRoblox(Kilopascal.toMegapascal(kilopascal))
+end
 
 local Pascal = {}
 function Pascal.toMegapascal(pascal: Pascal): Megapascal
@@ -94,6 +102,9 @@ function Pascal.toMillibar(pascal: Pascal): Millibar
 end
 function Pascal.toPoundsPerSquareInch(pascal: Pascal): PoundsPerSquareInch
 	return Megapascal.toPoundsPerSquareInch(Pascal.toMegapascal(pascal))
+end
+function Pascal.toRoblox(pascal: Pascal): PoundsPerSquareInch
+	return Megapascal.toRoblox(Pascal.toMegapascal(pascal))
 end
 
 local Atmosphere = {}
@@ -115,6 +126,9 @@ end
 function Atmosphere.toPoundsPerSquareInch(atmosphere: Atmosphere): PoundsPerSquareInch
 	return Megapascal.toPoundsPerSquareInch(Atmosphere.toMegapascal(atmosphere))
 end
+function Atmosphere.toRoblox(atmosphere: Atmosphere): number
+	return Megapascal.toRoblox(Atmosphere.toMegapascal(atmosphere))
+end
 
 local Bar = {}
 function Bar.toMegapascal(bar: Bar): Megapascal
@@ -134,6 +148,9 @@ function Bar.toMillibar(bar: Bar): Millibar
 end
 function Bar.toPoundsPerSquareInch(bar: Bar): PoundsPerSquareInch
 	return Megapascal.toPoundsPerSquareInch(Bar.toMegapascal(bar))
+end
+function Bar.toRoblox(bar: Bar): PoundsPerSquareInch
+	return Megapascal.toRoblox(Bar.toMegapascal(bar))
 end
 
 local Millibar = {}
@@ -155,6 +172,9 @@ end
 function Millibar.toPoundsPerSquareInch(millibar: Millibar): PoundsPerSquareInch
 	return Megapascal.toPoundsPerSquareInch(Bar.toMegapascal(millibar))
 end
+function Millibar.toRoblox(millibar: Millibar): PoundsPerSquareInch
+	return Megapascal.toRoblox(Bar.toMegapascal(millibar))
+end
 
 local PoundsPerSquareInch = {}
 function PoundsPerSquareInch.toMegapascal(poundsPerSquareInch: PoundsPerSquareInch): Megapascal
@@ -175,6 +195,32 @@ end
 function PoundsPerSquareInch.toMillibar(poundsPerSquareInch: PoundsPerSquareInch): Millibar
 	return Megapascal.toMillibar(PoundsPerSquareInch.toMegapascal(poundsPerSquareInch))
 end
+function PoundsPerSquareInch.toRoblox(poundsPerSquareInch: PoundsPerSquareInch): number
+	return Megapascal.toRoblox(PoundsPerSquareInch.toMegapascal(poundsPerSquareInch))
+end
+
+local Roblox = {}
+function Roblox.toMegapascal(roblox: number): Megapascal
+	return roblox * MEGAPASCAL_IN_ROBLOX
+end
+function Roblox.toKilopascal(roblox: number): Kilopascal
+	return Megapascal.toKilopascal(Roblox.toMegapascal(roblox))
+end
+function Roblox.toPascal(roblox: number): Pascal
+	return Megapascal.toPascal(Roblox.toMegapascal(roblox))
+end
+function Roblox.toAtmosphere(roblox: number): Atmosphere
+	return Megapascal.toAtmosphere(Roblox.toMegapascal(roblox))
+end
+function Roblox.toBar(roblox: number): Millibar
+	return Megapascal.toBar(Roblox.toMegapascal(roblox))
+end
+function Roblox.toMillibar(roblox: number): Millibar
+	return Megapascal.toMillibar(Roblox.toMegapascal(roblox))
+end
+function Roblox.toPoundsPerSquareInch(roblox: number): PoundsPerSquareInch
+	return Megapascal.toPoundsPerSquareInch(Roblox.toMegapascal(roblox))
+end
 
 return {
 	Megapascal = Megapascal,
@@ -184,4 +230,5 @@ return {
 	Bar = Bar,
 	Millibar = Millibar,
 	PoundsPerSquareInch = PoundsPerSquareInch,
+	Roblox = Roblox,
 }

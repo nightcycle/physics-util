@@ -1,7 +1,7 @@
 [package]
 name = "nightcycle/physics-util"
 description = "A physics util"
-version = "1.3.0"
+version = "1.4.0"
 authors = ["CJ Oyer <coyer@nightcycle.us>"]
 realm = "shared"
 registry = "https://github.com/upliftgames/wally-index"

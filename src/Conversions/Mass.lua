@@ -60,6 +60,7 @@ local MILLIGRAMS_IN_KILOGRAM = GRAMS_IN_KILOGRAM*1000
 local TONNES_IN_KILOGRAM = 1/1000
 local KILOTONNES_IN_KILOGRAM = TONNES_IN_KILOGRAM/1000
 local MEGATONNES_IN_KILOGRAM = KILOTONNES_IN_KILOGRAM/1000
+local KILOGRAM_IN_ROBLOX = 21.952
 
 local Kilogram = {}
 function Kilogram.toPound(kilogram: Kilogram): Pound
@@ -94,6 +95,9 @@ function Kilogram.toKilotonne(kilogram: Kilogram): Kilotonne
 end
 function Kilogram.toMegatonne(kilogram: Kilogram): Megatonne
 	return kilogram * MEGATONNES_IN_KILOGRAM
+end
+function Kilogram.toRoblox(kilogram: Kilogram): number
+	return kilogram / KILOGRAM_IN_ROBLOX
 end
 
 local Ounce = {}
@@ -130,6 +134,9 @@ end
 function Ounce.toMegatonne(ounce: Ounce): Megatonne
 	return Kilogram.toMegatonne(Ounce.toKilogram(ounce))
 end
+function Ounce.toRoblox(ounce: Ounce): number
+	return Kilogram.toRoblox(Ounce.toKilogram(ounce))
+end
 
 local Pound = {}
 function Pound.toKilogram(pound: Pound): Kilogram
@@ -164,6 +171,9 @@ function Pound.toKilotonne(pound: Pound): Kilotonne
 end
 function Pound.toMegatonne(pound: Pound): Megatonne
 	return Kilogram.toMegatonne(Pound.toKilogram(pound))
+end
+function Pound.toRoblox(pound: Pound): number
+	return Kilogram.toRoblox(Pound.toKilogram(pound))
 end
 
 local Stone = {}
@@ -200,6 +210,9 @@ end
 function Stone.toMegatonne(stone: Stone): Megatonne
 	return Kilogram.toMegatonne(Stone.toKilogram(stone))
 end
+function Stone.toRoblox(stone: Stone): number
+	return Kilogram.toRoblox(Stone.toKilogram(stone))
+end
 
 local Ton = {}
 function Ton.toKilogram(ton: Ton): Kilogram
@@ -234,6 +247,9 @@ function Ton.toKilotonne(ton: Ton): Kilotonne
 end
 function Ton.toMegatonne(ton: Ton): Megatonne
 	return Kilogram.toMegatonne(Ton.toKilogram(ton))
+end
+function Ton.toRoblox(ton: Ton): number
+	return Kilogram.toRoblox(Ton.toKilogram(ton))
 end
 
 local Kiloton = {}
@@ -270,6 +286,9 @@ end
 function Kiloton.toMegatonne(kiloton: Kiloton): Megatonne
 	return Kilogram.toMegatonne(Kiloton.toKilogram(kiloton))
 end
+function Kiloton.toRoblox(kiloton: Kiloton): number
+	return Kilogram.toRoblox(Kiloton.toKilogram(kiloton))
+end
 
 local Megaton = {}
 function Megaton.toKilogram(megaton: Megaton): Kilogram
@@ -304,6 +323,9 @@ function Megaton.toKilotonne(megaton: Megaton): Kilotonne
 end
 function Megaton.toMegatonne(megaton: Megaton): Megatonne
 	return Kilogram.toMegatonne(Megaton.toKilogram(megaton))
+end
+function Megaton.toRoblox(megaton: Megaton): number
+	return Kilogram.toRoblox(Megaton.toKilogram(megaton))
 end
 
 local Gram = {}
@@ -340,6 +362,9 @@ end
 function Gram.toMegatonne(gram: Gram): Megatonne
 	return Kilogram.toMegatonne(Gram.toKilogram(gram))
 end
+function Gram.toRoblox(gram: Gram): Megatonne
+	return Kilogram.toRoblox(Gram.toKilogram(gram))
+end
 
 local Milligram = {}
 function Milligram.toKilogram(milligram: Milligram): Kilogram
@@ -374,6 +399,9 @@ function Milligram.toKilotonne(milligram: Milligram): Kilotonne
 end
 function Milligram.toMegatonne(milligram: Milligram): Megatonne
 	return Kilogram.toMegatonne(Milligram.toKilogram(milligram))
+end
+function Milligram.toRoblox(milligram: Milligram): number
+	return Kilogram.toRoblox(Milligram.toKilogram(milligram))
 end
 
 local Tonne = {}
@@ -410,6 +438,9 @@ end
 function Tonne.toMegatonne(ounce: Tonne): Megatonne
 	return Kilogram.toMegatonne(Tonne.toKilogram(ounce))
 end
+function Tonne.toRoblox(ounce: Tonne): number
+	return Kilogram.toRoblox(Tonne.toKilogram(ounce))
+end
 
 local Kilotonne = {}
 function Kilotonne.toKilogram(kilotonne: Kilotonne): Kilogram
@@ -444,6 +475,9 @@ function Kilotonne.toTonne(kilotonne: Kilotonne): Tonne
 end
 function Kilotonne.toMegatonne(kilotonne: Kilotonne): Megatonne
 	return Kilogram.toMegatonne(Kilotonne.toKilogram(kilotonne))
+end
+function Kilotonne.toRoblox(kilotonne: Kilotonne): Megatonne
+	return Kilogram.toRoblox(Kilotonne.toKilogram(kilotonne))
 end
 
 local Megatonne = {}
@@ -480,6 +514,47 @@ end
 function Megatonne.toKilotonne(megatonne: Megatonne): Kilotonne
 	return Kilogram.toKilotonne(Megatonne.toKilogram(megatonne))
 end
+function Megatonne.toRoblox(megatonne: Megatonne): Kilotonne
+	return Kilogram.toRoblox(Megatonne.toKilogram(megatonne))
+end
+
+local Roblox = {}
+function Roblox.toKilogram(roblox: number): Kilogram
+	return KILOGRAM_IN_ROBLOX * roblox
+end
+function Roblox.toOunce(roblox: number): Ounce
+	return Kilogram.toOunce(Megatonne.toKilogram(roblox))
+end
+function Roblox.toPound(roblox: number): Pound
+	return Kilogram.toPound(Megatonne.toKilogram(roblox))
+end
+function Roblox.toStone(roblox: number): Stone
+	return Kilogram.toStone(Megatonne.toKilogram(roblox))
+end
+function Roblox.toTon(roblox: number): Ton
+	return Kilogram.toTon(Megatonne.toKilogram(roblox))
+end
+function Roblox.toKiloton(roblox: number): Kiloton
+	return Kilogram.toKiloton(Megatonne.toKilogram(roblox))
+end
+function Roblox.toMegaton(roblox: number): Megaton
+	return Kilogram.toMegaton(Megatonne.toKilogram(roblox))
+end
+function Roblox.toGram(roblox: number): Gram
+	return Kilogram.toGram(Megatonne.toKilogram(roblox))
+end
+function Roblox.toMilligram(roblox: number): Milligram
+	return Kilogram.toMilligram(Megatonne.toKilogram(roblox))
+end
+function Roblox.toTonne(roblox: number): Tonne
+	return Kilogram.toTonne(Megatonne.toKilogram(roblox))
+end
+function Roblox.toKilotonne(roblox: number): Kilotonne
+	return Kilogram.toKilotonne(Megatonne.toKilogram(roblox))
+end
+function Roblox.toMegatonne(roblox: number): Kilotonne
+	return Kilogram.toKilotonne(Megatonne.toKilogram(roblox))
+end
 
 return {
 	Ounce = Ounce,
@@ -494,4 +569,5 @@ return {
 	Tonne = Tonne,
 	Kilotonne = Kilotonne,
 	Megatonne = Megatonne,
+	Roblox = Roblox,
 }

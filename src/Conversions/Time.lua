@@ -106,6 +106,9 @@ end
 function Second.toNanosecond(second: Second): Nanosecond
 	return Second.toPicosecond(second) / PICOSECONDS_IN_NANOSECOND
 end
+function Second.toRoblox(second: Second): number
+	return second
+end
 
 local Day = {}
 function Day.toSecond(day: Day): Second
@@ -144,6 +147,7 @@ end
 function Day.toNanosecond(day: Day): Nanosecond
 	return Second.toNanosecond(Day.toSecond(day))
 end
+Day.toRoblox = Day.toSecond
 
 local Year = {}
 function Year.toDay(year: Year): Year
@@ -182,6 +186,7 @@ end
 function Year.toNanosecond(year: Year): Nanosecond
 	return Day.toNanosecond(Year.toDay(year))
 end
+Year.toRoblox = Year.toSecond
 
 local Microsecond = {}
 function Microsecond.toSecond(microsecond: Microsecond): Second
@@ -220,6 +225,7 @@ end
 function Microsecond.toNanosecond(microsecond: Microsecond): Nanosecond
 	return Second.toNanosecond(Microsecond.toSecond(microsecond))
 end
+Microsecond.toRoblox = Microsecond.toSecond
 
 local Picosecond = {}
 function Picosecond.toMicrosecond(picosecond: Picosecond): Microsecond
@@ -258,6 +264,7 @@ end
 function Picosecond.toMillenia(picosecond: Picosecond): Millenia
 	return Microsecond.toMillenia(Picosecond.toMicrosecond(picosecond))
 end
+Picosecond.toRoblox = Picosecond.toSecond
 
 local Nanosecond = {}
 function Nanosecond.toPicosecond(nanosecond: Nanosecond): Nanosecond
@@ -296,6 +303,7 @@ end
 function Nanosecond.toMillenia(nanosecond: Nanosecond): Millenia
 	return Picosecond.toMillenia(Nanosecond.toPicosecond(nanosecond))
 end
+Nanosecond.toRoblox = Nanosecond.toSecond
 
 local Millisecond = {}
 function Millisecond.toMicrosecond(millisecond: Millisecond): Millisecond
@@ -334,6 +342,7 @@ end
 function Millisecond.toNanosecond(millisecond: Millisecond): Nanosecond
 	return Microsecond.toNanosecond(Millisecond.toMicrosecond(millisecond))
 end
+Millisecond.toRoblox = Millisecond.toSecond
 
 local Minute = {}
 function Minute.toSecond(minute: Minute): Second
@@ -372,7 +381,7 @@ end
 function Minute.toNanosecond(minute: Minute): Nanosecond
 	return Second.toNanosecond(Minute.toSecond(minute))
 end
-
+Minute.toRoblox = Minute.toSecond
 
 local Hour = {}
 function Hour.toSecond(hour: Hour): Hour
@@ -411,6 +420,7 @@ end
 function Hour.toNanosecond(hour: Hour): Nanosecond
 	return Second.toNanosecond(Hour.toSecond(hour))
 end
+Hour.toRoblox = Hour.toSecond
 
 local Week = {}
 function Week.toDay(week: Week): Week
@@ -449,6 +459,7 @@ end
 function Week.toNanosecond(week: Week): Nanosecond
 	return Day.toNanosecond(Week.toDay(week))
 end
+Week.toRoblox = Week.toSecond
 
 local Millenia = {}
 function Millenia.toYear(millenia: Millenia): Year
@@ -487,6 +498,7 @@ end
 function Millenia.toNanosecond(millenia: Millenia): Nanosecond
 	return Year.toNanosecond(Millenia.toYear(millenia))
 end
+Millenia.toRoblox = Millenia.toSecond
 
 local Decade = {}
 function Decade.toYear(decade: Decade): Year
@@ -525,6 +537,7 @@ end
 function Decade.toNanosecond(decade: Decade): Nanosecond
 	return Year.toNanosecond(Decade.toYear(decade))
 end
+Decade.toRoblox = Decade.toSecond
 
 local Century = {}
 function Century.toYear(century: Century): Year
@@ -563,6 +576,7 @@ end
 function Century.toNanosecond(century: Century): Nanosecond
 	return Year.toNanosecond(Century.toYear(century))
 end
+Century.toRoblox = Century.toSecond
 
 return {
 	Millenia = Millenia,
@@ -578,4 +592,5 @@ return {
 	Microsecond = Microsecond,
 	Nanosecond = Nanosecond,
 	Picosecond = Picosecond,
+	Roblox = Second,
 }

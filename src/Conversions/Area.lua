@@ -49,6 +49,8 @@ local SQUARE_MILE_IN_SQUARE_METER = 3.861*10^-7
 local SQUARE_KILOMETERS_IN_SQUARE_METER = 10^-6
 local SQUARE_CENTIMERS_IN_SQUARE_METER = 10000
 local SQUARE_MILLIMETERS_IN_SQUARE_METER = 1000000
+local SQUARE_CENTIMETERS_IN_ROBLOX = 28^2
+local SQUARE_METERS_IN_ROBLOX = SQUARE_CENTIMETERS_IN_ROBLOX/(100^2)
 
 local SquareMeter = {}
 function SquareMeter.toSquareCentimeter(squareMeter: SquareMeter): SquareCentimeter
@@ -77,6 +79,9 @@ function SquareMeter.toHectare(squareMeter: SquareMeter): Hectare
 end
 function SquareMeter.toAcre(squareMeter: SquareMeter): Acre
 	return squareMeter * ACRES_IN_SQUARE_METER
+end
+function SquareMeter.toRoblox(squareMeter: SquareMeter): number
+	return squareMeter / SQUARE_METERS_IN_ROBLOX
 end
 
 local SquareCentimeter = {}
@@ -107,6 +112,9 @@ end
 function SquareCentimeter.toAcre(squareCentimeter: SquareCentimeter): Acre
 	return SquareMeter.toAcre(SquareCentimeter.toSquareMeter(squareCentimeter))
 end
+function SquareCentimeter.toRoblox(squareCentimeter: SquareCentimeter): number
+	return SquareMeter.toRoblox(SquareCentimeter.toSquareMeter(squareCentimeter))
+end
 
 local SquareMillimeter = {}
 function SquareMillimeter.toSquareMeter(squareMillimeter: SquareMillimeter): SquareMeter
@@ -135,6 +143,9 @@ function SquareMillimeter.toHectare(squareMillimeter: SquareMillimeter): Hectare
 end
 function SquareMillimeter.toAcre(squareMillimeter: SquareMillimeter): Acre
 	return SquareMeter.toAcre(SquareMillimeter.toSquareMeter(squareMillimeter))
+end
+function SquareMillimeter.toRoblox(squareMillimeter: SquareMillimeter): number
+	return SquareMeter.toRoblox(SquareMillimeter.toSquareMeter(squareMillimeter))
 end
 
 local SquareFeet = {}
@@ -165,6 +176,9 @@ end
 function SquareFeet.toAcre(squareFeet: SquareFeet): Acre
 	return SquareMeter.toAcre(SquareFeet.toSquareMeter(squareFeet))
 end
+function SquareFeet.toRoblox(squareFeet: SquareFeet): number
+	return SquareMeter.toRoblox(SquareFeet.toSquareMeter(squareFeet))
+end
 
 local SquareInch = {}
 function SquareInch.toSquareMeter(squareInch: SquareInch): SquareMeter
@@ -193,6 +207,9 @@ function SquareInch.toHectare(squareInch: SquareInch): Hectare
 end
 function SquareInch.toAcre(squareInch: SquareInch): Acre
 	return SquareMeter.toAcre(SquareInch.toSquareMeter(squareInch))
+end
+function SquareInch.toRoblox(squareInch: SquareInch): number
+	return SquareMeter.toRoblox(SquareInch.toSquareMeter(squareInch))
 end
 
 local SquareYard = {}
@@ -223,6 +240,9 @@ end
 function SquareYard.toAcre(squareYard: SquareYard): Acre
 	return SquareMeter.toAcre(SquareYard.toSquareMeter(squareYard))
 end
+function SquareYard.toRoblox(squareYard: SquareYard): number
+	return SquareMeter.toRoblox(SquareYard.toSquareMeter(squareYard))
+end
 
 local SquareKilometer = {}
 function SquareKilometer.toSquareMeter(squareKilometer: SquareKilometer): SquareMeter
@@ -251,6 +271,9 @@ function SquareKilometer.toHectare(squareKilometer: SquareKilometer): Hectare
 end
 function SquareKilometer.toAcre(squareKilometer: SquareKilometer): Acre
 	return SquareMeter.toAcre(SquareKilometer.toSquareMeter(squareKilometer))
+end
+function SquareKilometer.toRoblox(squareKilometer: SquareKilometer): number
+	return SquareMeter.toRoblox(SquareKilometer.toSquareMeter(squareKilometer))
 end
 
 local SquareMile = {}
@@ -281,6 +304,9 @@ end
 function SquareMile.toAcre(squareMile: SquareMile): Acre
 	return SquareMeter.toAcre(SquareMile.toSquareMeter(squareMile))
 end
+function SquareMile.toRoblox(squareMile: SquareMile): number
+	return SquareMeter.toRoblox(SquareMile.toSquareMeter(squareMile))
+end
 
 local Acre = {}
 function Acre.toSquareMeter(acre: Acre): SquareMeter
@@ -309,6 +335,9 @@ function Acre.toHectare(acre: Acre): Hectare
 end
 function Acre.toSquareCentimeter(acre: Acre): SquareCentimeter
 	return SquareMeter.toAcre(Acre.toSquareMeter(acre))
+end
+function Acre.toRoblox(acre: Acre): number
+	return SquareMeter.toRoblox(Acre.toSquareMeter(acre))
 end
 
 local Hectare = {}
@@ -339,6 +368,41 @@ end
 function Hectare.toAcre(hectare: Hectare): Acre
 	return SquareMeter.toAcre(Hectare.toSquareMeter(hectare))
 end
+function Hectare.toRoblox(hectare: Hectare): number
+	return SquareMeter.toRoblox(Hectare.toSquareMeter(hectare))
+end
+
+local Roblox = {}
+function Roblox.toSquareMeter(roblox: number): SquareMeter
+	return SQUARE_METERS_IN_ROBLOX * roblox
+end
+function Roblox.toSquareMillimeter(roblox: number): SquareMillimeter
+	return SquareMeter.toSquareMillimeter(Roblox.toSquareMeter(roblox))
+end
+function Roblox.toSquareKilometer(roblox: number): SquareKilometer
+	return SquareMeter.toSquareKilometer(Roblox.toSquareMeter(roblox))
+end
+function Roblox.toSquareMile(roblox: number): SquareMile
+	return SquareMeter.toSquareMile(Roblox.toSquareMeter(roblox))
+end
+function Roblox.toSquareYard(roblox: number): SquareYard
+	return SquareMeter.toSquareYard(Roblox.toSquareMeter(roblox))
+end
+function Roblox.toSquareFeet(roblox: number): SquareFeet
+	return SquareMeter.toSquareFeet(Roblox.toSquareMeter(roblox))
+end
+function Roblox.toSquareInch(roblox: number): SquareInch
+	return SquareMeter.toSquareInch(Roblox.toSquareMeter(roblox))
+end
+function Roblox.toSquareCentimeter(roblox: number): SquareCentimeter
+	return SquareMeter.toSquareCentimeter(Roblox.toSquareMeter(roblox))
+end
+function Roblox.toAcre(roblox: number): Acre
+	return SquareMeter.toAcre(Roblox.toSquareMeter(roblox))
+end
+function Roblox.toHectare(roblox: number): Hectare
+	return SquareMeter.toHectare(Roblox.toSquareMeter(roblox))
+end
 
 return {
 	SquareMeter = SquareMeter,
@@ -351,4 +415,5 @@ return {
 	SquareMile = SquareMile,
 	Acre = Acre,
 	Hectare = Hectare,
+	Roblox = Roblox,
 }

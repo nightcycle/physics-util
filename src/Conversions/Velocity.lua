@@ -25,6 +25,7 @@ local KPH_IN_MPS = 3.6
 local MPH_IN_MPS = 2.23694
 local FPS_IN_MPS = 3.28084
 local KNOTS_IN_MPS = 1.94384
+local ROBLOX_IN_MPS = 3.57
 
 local MetersPerSecond = {}
 
@@ -40,6 +41,9 @@ end
 function MetersPerSecond.toKnot(metersPerSecond: MetersPerSecond): Knot
 	return metersPerSecond * KNOTS_IN_MPS
 end
+function MetersPerSecond.toRoblox(metersPerSecond: MetersPerSecond): number
+	return metersPerSecond * ROBLOX_IN_MPS
+end
 
 local KilometersPerHour = {}
 function KilometersPerHour.toMetersPerSecond(kilometersPerHour: KilometersPerHour): MetersPerSecond
@@ -53,6 +57,9 @@ function KilometersPerHour.toFeetPerSecond(kilometersPerHour: KilometersPerHour)
 end
 function KilometersPerHour.toKnot(kilometersPerHour: KilometersPerHour): Knot
 	return MetersPerSecond.toKnot(KilometersPerHour.toMetersPerSecond(kilometersPerHour))
+end
+function KilometersPerHour.toRoblox(kilometersPerHour: KilometersPerHour): number
+	return MetersPerSecond.toRoblox(KilometersPerHour.toMetersPerSecond(kilometersPerHour))
 end
 
 local MilesPerHour = {}
@@ -68,6 +75,9 @@ end
 function MilesPerHour.toKnot(milesPerHour: MilesPerHour): Knot
 	return MetersPerSecond.toKnot(MilesPerHour.toMetersPerSecond(milesPerHour))
 end
+function MilesPerHour.toRoblox(milesPerHour: MilesPerHour): number
+	return MetersPerSecond.toRoblox(MilesPerHour.toMetersPerSecond(milesPerHour))
+end
 
 local FeetPerSecond = {}
 function FeetPerSecond.toMetersPerSecond(feetPerSecond: FeetPerSecond): MetersPerSecond
@@ -81,6 +91,9 @@ function FeetPerSecond.toMilesPerHour(feetPerSecond: FeetPerSecond): MilesPerHou
 end
 function FeetPerSecond.toKnot(feetPerSecond: FeetPerSecond): Knot
 	return MetersPerSecond.toKnot(FeetPerSecond.toMetersPerSecond(feetPerSecond))
+end
+function FeetPerSecond.toRoblox(feetPerSecond: FeetPerSecond): number
+	return MetersPerSecond.toRoblox(FeetPerSecond.toMetersPerSecond(feetPerSecond))
 end
 
 local Knot = {}
@@ -96,6 +109,27 @@ end
 function Knot.toFeetPerSecond(knot: Knot): FeetPerSecond
 	return MetersPerSecond.toFeetPerSecond(FeetPerSecond.toMetersPerSecond(knot))
 end
+function Knot.toRoblox(knot: Knot): number
+	return MetersPerSecond.toRoblox(FeetPerSecond.toMetersPerSecond(knot))
+end
+
+local Roblox = {}
+function Roblox.toMetersPerSecond(roblox: number): MetersPerSecond
+	return roblox / ROBLOX_IN_MPS
+end
+function Roblox.toKilometersPerHour(roblox: number): KilometersPerHour
+	return MetersPerSecond.toKilometersPerHour(Roblox.toMetersPerSecond(roblox))
+end
+function Roblox.toMilesPerHour(roblox: number): MilesPerHour
+	return MetersPerSecond.toMilesPerHour(Roblox.toMetersPerSecond(roblox))
+end
+function Roblox.toFeetPerSecond(roblox: number): FeetPerSecond
+	return MetersPerSecond.toFeetPerSecond(Roblox.toMetersPerSecond(roblox))
+end
+function Roblox.toKnot(roblox: number): Knot
+	return MetersPerSecond.toKnot(Roblox.toMetersPerSecond(roblox))
+end
+
 
 return {
 	MetersPerSecond = MetersPerSecond,
@@ -103,6 +137,7 @@ return {
 	MilesPerHour = MilesPerHour,
 	FeetPerSecond = FeetPerSecond,
 	Knot = Knot,
+	Roblox = Roblox,
 }
 
 

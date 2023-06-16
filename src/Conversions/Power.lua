@@ -35,6 +35,10 @@ local GIGAWATTS_IN_KILOWATT = MEGAWATTS_IN_KILOWATT / 1000
 local HORSEPOWER_IN_KILOWATT = 0.7457
 local FOOTPOUNDS_IN_KILOWATT = 1/0.000023
 local KILOGRAM_METERS_PER_SECOND_IN_KILOWATT = 0.0098
+local ROBLOX_IN_NEWTON = 0.163
+local ROBLOX_IN_MPS = 3.57
+local ROBLOX_IN_WATT = ROBLOX_IN_NEWTON * ROBLOX_IN_MPS
+local ROBLOX_IN_KILOWATT = ROBLOX_IN_WATT * WATTS_IN_KILOWATT
 
 local Kilowatt = {}
 function Kilowatt.toWatt(kilowatt: Kilowatt): Watt
@@ -54,6 +58,9 @@ function Kilowatt.toFootPoundsPerMinute(kilowatt: Kilowatt): FootPoundsPerMinute
 end
 function Kilowatt.toKilogramMetersPerSecond(kilowatt: Kilowatt): KilogramMetersPerSecond
 	return kilowatt * KILOGRAM_METERS_PER_SECOND_IN_KILOWATT
+end
+function Kilowatt.toRoblox(kilowatt: Kilowatt): number
+	return kilowatt * ROBLOX_IN_KILOWATT
 end
 
 local Watt = {}
@@ -75,6 +82,9 @@ end
 function Watt.toKilogramMetersPerSecond(kilowatt: Kilowatt): KilogramMetersPerSecond
 	return Kilowatt.toKilogramMetersPerSecond(Watt.toKilowatt(kilowatt))
 end
+function Watt.toRoblox(kilowatt: Kilowatt): number
+	return Kilowatt.toRoblox(Watt.toKilowatt(kilowatt))
+end
 
 local Megawatt = {}
 function Megawatt.toKilowatt(megawatt: Megawatt): Kilowatt
@@ -94,6 +104,9 @@ function Megawatt.toFootPoundsPerMinute(megawatt: Megawatt): FootPoundsPerMinute
 end
 function Megawatt.toKilogramMetersPerSecond(megawatt: Megawatt): KilogramMetersPerSecond
 	return Kilowatt.toKilogramMetersPerSecond(Megawatt.toKilowatt(megawatt))
+end
+function Megawatt.toRoblox(megawatt: Megawatt): number
+	return Kilowatt.toRoblox(Megawatt.toKilowatt(megawatt))
 end
 
 local Gigawatt = {}
@@ -115,6 +128,9 @@ end
 function Gigawatt.toKilogramMetersPerSecond(gigawatt: Gigawatt): KilogramMetersPerSecond
 	return Kilowatt.toKilogramMetersPerSecond(Gigawatt.toKilowatt(gigawatt))
 end
+function Gigawatt.toRoblox(gigawatt: Gigawatt): number
+	return Kilowatt.toRoblox(Gigawatt.toKilowatt(gigawatt))
+end
 
 local Horsepower = {}
 function Horsepower.toKilowatt(horsepower: Horsepower): Kilowatt
@@ -134,6 +150,9 @@ function Horsepower.toFootPoundsPerMinute(horsepower: Horsepower): FootPoundsPer
 end
 function Horsepower.toKilogramMetersPerSecond(horsepower: Horsepower): KilogramMetersPerSecond
 	return Kilowatt.toKilogramMetersPerSecond(Horsepower.toKilowatt(horsepower))
+end
+function Horsepower.toRoblox(horsepower: Horsepower): number
+	return Kilowatt.toRoblox(Horsepower.toKilowatt(horsepower))
 end
 
 local FootPoundsPerMinute = {}
@@ -155,6 +174,33 @@ end
 function FootPoundsPerMinute.toKilogramMetersPerSecond(footPoundsPerMinute: FootPoundsPerMinute): KilogramMetersPerSecond
 	return Kilowatt.toKilogramMetersPerSecond(FootPoundsPerMinute.toKilowatt(footPoundsPerMinute))
 end
+function FootPoundsPerMinute.toRoblox(footPoundsPerMinute: FootPoundsPerMinute): number
+	return Kilowatt.toRoblox(FootPoundsPerMinute.toKilowatt(footPoundsPerMinute))
+end
+
+
+local Roblox = {}
+function Roblox.toKilowatt(roblox: number): Kilowatt
+	return roblox / ROBLOX_IN_KILOWATT
+end
+function Roblox.toWatt(roblox: number): Watt
+	return Kilowatt.toWatt(Roblox.toKilowatt(roblox))
+end
+function Roblox.toMegawatt(roblox: number): Megawatt
+	return Kilowatt.toMegawatt(Roblox.toKilowatt(roblox))
+end
+function Roblox.toGigawatt(roblox: number): Gigawatt
+	return Kilowatt.toGigawatt(Roblox.toKilowatt(roblox))
+end
+function Roblox.toHorsepower(roblox: number): Horsepower
+	return Kilowatt.toHorsepower(Roblox.toKilowatt(roblox))
+end
+function Roblox.toKilogramMetersPerSecond(roblox: number): KilogramMetersPerSecond
+	return Kilowatt.toKilogramMetersPerSecond(Roblox.toKilowatt(roblox))
+end
+function Roblox.toFootPoundsPerMinute(roblox: number): FootPoundsPerMinute
+	return Kilowatt.toFootPoundsPerMinute(Roblox.toKilowatt(roblox))
+end
 
 return {
 	Kilowatt = Kilowatt,
@@ -162,5 +208,6 @@ return {
 	Megawatt = Megawatt,
 	Gigawatt = Gigawatt,
 	Horsepower = Horsepower,
-	FootPoundsPerMinute = FootPoundsPerMinute
+	FootPoundsPerMinute = FootPoundsPerMinute,
+	Roblox = Roblox,
 }

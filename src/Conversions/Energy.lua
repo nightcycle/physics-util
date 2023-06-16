@@ -34,6 +34,7 @@ local BTUS_IN_JOULE = 0.000947817
 local KJ_IN_JOULE = 1/1000
 local MJ_IN_JOULE = KJ_IN_JOULE/1000
 local GJ_IN_JOULE = MJ_IN_JOULE/1000
+local ROBLOX_IN_JOULE = 0.581
 
 local Joule = {}
 function Joule.toKilojoule(joule: Joule): Kilojoule
@@ -53,6 +54,9 @@ function Joule.toBritishThermalUnit(joule: Joule): BritishThermalUnit
 end
 function Joule.toGigajoule(joule: Joule): Gigajoule
 	return joule * GJ_IN_JOULE
+end
+function Joule.toRoblox(joule: Joule): number
+	return joule * ROBLOX_IN_JOULE
 end
 
 local Kilojoule = {}
@@ -74,7 +78,9 @@ end
 function Kilojoule.toGigajoule(kilojoule: Kilojoule): Gigajoule
 	return Joule.toGigajoule(Kilojoule.toJoule(kilojoule))
 end
-
+function Kilojoule.toRoblox(kilojoule: Kilojoule): number
+	return Joule.toRoblox(Kilojoule.toJoule(kilojoule))
+end
 
 local Megajoule = {}
 function Megajoule.toJoule(megajoule: Megajoule): Joule
@@ -95,6 +101,10 @@ end
 function Megajoule.toGigajoule(megajoule: Megajoule): Gigajoule
 	return Joule.toGigajoule(Megajoule.toJoule(megajoule))
 end
+function Megajoule.toRoblox(megajoule: Megajoule): number
+	return Joule.toRoblox(Megajoule.toJoule(megajoule))
+end
+
 
 local Calorie = {}
 function Calorie.toJoule(calorie: Calorie): Joule
@@ -114,6 +124,9 @@ function Calorie.toBritishThermalUnit(calorie: Calorie): BritishThermalUnit
 end
 function Calorie.toGigajoule(calorie: Calorie): Gigajoule
 	return Joule.toGigajoule(Calorie.toJoule(calorie))
+end
+function Calorie.toRoblox(calorie: Calorie): number
+	return Joule.toRoblox(Calorie.toJoule(calorie))
 end
 
 local Kilocalorie = {}
@@ -135,6 +148,9 @@ end
 function Kilocalorie.toGigajoule(kilocalorie: Kilocalorie): Gigajoule
 	return Joule.toGigajoule(Kilocalorie.toJoule(kilocalorie))
 end
+function Kilocalorie.toRoblox(kilocalorie: Kilocalorie): number
+	return Joule.toRoblox(Kilocalorie.toJoule(kilocalorie))
+end
 
 local BritishThermalUnit = {}
 function BritishThermalUnit.toJoule(britishThermalUnit: BritishThermalUnit): Joule
@@ -154,6 +170,9 @@ function BritishThermalUnit.toCalorie(britishThermalUnit: BritishThermalUnit): C
 end
 function BritishThermalUnit.toGigajoule(britishThermalUnit: BritishThermalUnit): Gigajoule
 	return Joule.toGigajoule(BritishThermalUnit.toJoule(britishThermalUnit))
+end
+function BritishThermalUnit.toRoblox(britishThermalUnit: BritishThermalUnit): number
+	return Joule.toRoblox(BritishThermalUnit.toJoule(britishThermalUnit))
 end
 
 local Gigajoule = {}
@@ -175,6 +194,32 @@ end
 function Gigajoule.toBritishThermalUnit(gigajoule: Gigajoule): BritishThermalUnit
 	return Joule.toBritishThermalUnit(Gigajoule.toJoule(gigajoule))
 end
+function Gigajoule.toRoblox(gigajoule: Gigajoule): number
+	return Joule.toRoblox(Gigajoule.toJoule(gigajoule))
+end
+
+local Roblox = {}
+function Roblox.toJoule(roblox: number): Joule
+	return roblox / ROBLOX_IN_JOULE
+end
+function Roblox.toKilojoule(roblox: number): Kilojoule
+	return Joule.toKilojoule(Roblox.toJoule(roblox))
+end
+function Roblox.toMegajoule(roblox: number): Megajoule
+	return Joule.toMegajoule(Roblox.toJoule(roblox))
+end
+function Roblox.toKilocalorie(roblox: number): Kilocalorie
+	return Joule.toKilocalorie(Roblox.toJoule(roblox))
+end
+function Roblox.toCalorie(roblox: number): Calorie
+	return Joule.toCalorie(Roblox.toJoule(roblox))
+end
+function Roblox.toBritishThermalUnit(roblox: number): BritishThermalUnit
+	return Joule.toBritishThermalUnit(Roblox.toJoule(roblox))
+end
+function Roblox.toGigajoule(roblox: number): Gigajoule
+	return Joule.toGigajoule(Roblox.toJoule(roblox))
+end
 
 return {
 	Joule = Joule,
@@ -184,4 +229,5 @@ return {
 	Kilocalorie = Kilocalorie,
 	BritishThermalUnit = BritishThermalUnit,
 	Gigajoule = Gigajoule,
+	Roblox = Roblox,
 }

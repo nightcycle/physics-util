@@ -73,6 +73,7 @@ local MICROMETERS_IN_MILLIMETER = 1000
 local NANOMETERS_IN_MICROMETER = 1000
 local PICOMETERS_IN_NANOMETER = 1000
 local PLANCK_LENGTH_IN_PICOMETERS = 1.6*10^-23
+local CENTIMETERS_IN_ROBLOX = 28
 
 local Meter = {}
 function Meter.toKilometer(meter: Meter): Kilometer
@@ -113,6 +114,9 @@ function Meter.toPicometer(meter: Meter): Picometer
 end
 function Meter.toPlanck(meter: Meter): Planck
 	return Meter.toPicometer(meter) * PLANCK_LENGTH_IN_PICOMETERS
+end
+function Meter.toRoblox(meter: Meter): number
+	return (CENTIMETERS_IN_METER * meter) / CENTIMETERS_IN_ROBLOX
 end
 
 local Kilometer = {}
@@ -155,6 +159,9 @@ end
 function Kilometer.toPlanck(kilometer: Kilometer): Planck
 	return Meter.toPlanck(Kilometer.toMeter(kilometer))
 end
+function Kilometer.toRoblox(kilometer: Kilometer): number
+	return Meter.toRoblox(Kilometer.toMeter(kilometer))
+end
 
 local AstronomicalUnit = {}
 function AstronomicalUnit.toKilometer(astronomicalUnit: AstronomicalUnit): Kilometer
@@ -195,6 +202,9 @@ function AstronomicalUnit.toPicometer(astronomicalUnit: AstronomicalUnit): Picom
 end
 function AstronomicalUnit.toPlanck(astronomicalUnit: AstronomicalUnit): Planck
 	return Kilometer.toPlanck(AstronomicalUnit.toKilometer(astronomicalUnit))
+end
+function AstronomicalUnit.toRoblox(astronomicalUnit: AstronomicalUnit): number
+	return Kilometer.toRoblox(AstronomicalUnit.toKilometer(astronomicalUnit))
 end
 
 local LightYear = {}
@@ -237,6 +247,9 @@ end
 function LightYear.toPlanck(lightYear: LightYear): Planck
 	return Kilometer.toPlanck(LightYear.toKilometer(lightYear))
 end
+function LightYear.toRoblox(lightYear: LightYear): number
+	return Kilometer.toRoblox(LightYear.toKilometer(lightYear))
+end
 
 local LightSecond = {}
 function LightSecond.toKilometer(lightSecond: LightSecond): Kilometer
@@ -278,6 +291,9 @@ end
 function LightSecond.toPlanck(lightSecond: LightSecond): Planck
 	return Kilometer.toPlanck(LightSecond.toKilometer(lightSecond))
 end
+function LightSecond.toRoblox(lightSecond: LightSecond): number
+	return Kilometer.toRoblox(LightSecond.toKilometer(lightSecond))
+end
 
 local League = {}
 function League.toMeter(league: League): Meter
@@ -316,8 +332,11 @@ end
 function League.toPicometer(league: League): Picometer
 	return Meter.toPicometer(League.toMeter(league))
 end
-function League.toPlanck(league: League): Planck
+function League.toPlanck(league: League): number
 	return Meter.toPlanck(League.toMeter(league))
+end
+function League.toRoblox(league: League): Planck
+	return Meter.toRoblox(League.toMeter(league))
 end
 
 local Mile = {}
@@ -360,6 +379,9 @@ end
 function Mile.toPlanck(mile: Mile): Planck
 	return Kilometer.toPlanck(Mile.toKilometer(mile))
 end
+function Mile.toRoblox(mile: Mile): number
+	return Kilometer.toRoblox(Mile.toKilometer(mile))
+end
 
 local Feet = {}
 function Feet.toMeter(feet: Feet): Meter
@@ -400,6 +422,9 @@ function Feet.toPicometer(feet: Feet): Picometer
 end
 function Feet.toPlanck(feet: Feet): Planck
 	return Meter.toPlanck(Feet.toMeter(feet))
+end
+function Feet.toRoblox(feet: Feet): number
+	return Meter.toRoblox(Feet.toMeter(feet))
 end
 
 local Centimeter = {}
@@ -442,6 +467,53 @@ end
 function Centimeter.toPlanck(centimeter: Centimeter): Planck
 	return Meter.toPlanck(Centimeter.toMeter(centimeter))
 end
+function Centimeter.toRoblox(centimeter: Centimeter): number
+	return centimeter / CENTIMETERS_IN_ROBLOX
+end
+
+local Roblox = {}
+function Roblox.toCentimeter(roblox: number): Centimeter
+	return roblox * CENTIMETERS_IN_ROBLOX
+end
+function Roblox.toMeter(roblox: number): Meter
+	return Centimeter.toMeter(Roblox.toCentimeter(roblox))
+end
+function Roblox.toKilometer(roblox: Centimeter): Kilometer
+	return Centimeter.toKilometer(Roblox.toCentimeter(roblox))
+end
+function Roblox.toAstronomicalUnit(roblox: Centimeter): AstronomicalUnit
+	return Centimeter.toAstronomicalUnit(Roblox.toCentimeter(roblox))
+end
+function Roblox.toLightYear(roblox: Centimeter): LightYear
+	return Centimeter.toLightYear(Roblox.toCentimeter(roblox))
+end
+function Roblox.toLightSecond(roblox: Centimeter): LightSecond
+	return Centimeter.toLightSecond(Roblox.toCentimeter(roblox))
+end
+function Roblox.toLeague(roblox: Centimeter): League
+	return Centimeter.toLeague(Roblox.toCentimeter(roblox))
+end
+function Roblox.toMile(roblox: Centimeter): Mile
+	return Centimeter.toMile(Roblox.toCentimeter(roblox))
+end
+function Roblox.toFeet(roblox: Centimeter): Feet
+	return Centimeter.toFeet(Roblox.toCentimeter(roblox))
+end
+function Roblox.toMillimeter(roblox: Centimeter): Millimeter
+	return Centimeter.toMillimeter(Roblox.toCentimeter(roblox))
+end
+function Roblox.toMicrometer(roblox: Centimeter): Micrometer
+	return Centimeter.toMicrometer(Roblox.toCentimeter(roblox))
+end
+function Roblox.toNanometer(roblox: Centimeter): Nanometer
+	return Centimeter.toNanometer(Roblox.toCentimeter(roblox))
+end
+function Roblox.toPicometer(roblox: Centimeter): Picometer
+	return Centimeter.toPicometer(Roblox.toCentimeter(roblox))
+end
+function Roblox.toPlanck(roblox: Centimeter): Planck
+	return Centimeter.toPlanck(Roblox.toCentimeter(roblox))
+end
 
 local Millimeter = {}
 function Millimeter.toMeter(millimeter: Millimeter): Meter
@@ -482,6 +554,9 @@ function Millimeter.toPicometer(millimeter: Millimeter): Picometer
 end
 function Millimeter.toPlanck(millimeter: Millimeter): Planck
 	return Meter.toPlanck(Millimeter.toMeter(millimeter))
+end
+function Millimeter.toRoblox(millimeter: Millimeter): number
+	return Meter.toRoblox(Millimeter.toMeter(millimeter))
 end
 
 local Micrometer = {}
@@ -524,6 +599,9 @@ end
 function Micrometer.toPlanck(micrometer: Micrometer): Planck
 	return Meter.toPlanck(Micrometer.toMeter(micrometer))
 end
+function Micrometer.toRoblox(micrometer: Micrometer): number
+	return Meter.toRoblox(Micrometer.toMeter(micrometer))
+end
 
 local Nanometer = {}
 function Nanometer.toMicrometer(nanometer: Nanometer): Micrometer
@@ -564,6 +642,9 @@ function Nanometer.toPicometer(nanometer: Nanometer): Picometer
 end
 function Nanometer.toPlanck(nanometer: Nanometer): Planck
 	return Meter.toPlanck(Nanometer.toMeter(nanometer))
+end
+function Nanometer.toRoblox(nanometer: Nanometer): number
+	return Meter.toRoblox(Nanometer.toMeter(nanometer))
 end
 
 local Picometer = {}
@@ -609,6 +690,9 @@ end
 function Picometer.toPlanck(picometer: Picometer): Planck
 	return Meter.toPlanck(Picometer.toMeter(picometer))
 end
+function Picometer.toRoblox(picometer: Picometer): number
+	return Meter.toRoblox(Picometer.toMeter(picometer))
+end
 
 local Planck = {}
 function Planck.toPicometer(planck: Planck): Picometer
@@ -650,6 +734,9 @@ end
 function Planck.toNanometer(planck: Planck): Nanometer
 	return Meter.toNanometer(Planck.toMeter(planck))
 end
+function Planck.toRoblox(planck: Planck): number
+	return Meter.toRoblox(Planck.toMeter(planck))
+end
 
 return {
 	Meter = Meter,
@@ -665,5 +752,6 @@ return {
 	Micrometer = Micrometer,
 	Nanometer = Nanometer,
 	Picometer = Picometer,
-	Planck = Planck
+	Planck = Planck,
+	Roblox = Roblox,
 }

@@ -49,6 +49,8 @@ local CUPS_IN_LITER = 4.16667
 local CUBIC_FEET_IN_LITER = 0.0353147
 local CUBIC_INCHES_IN_LITER = 61.0237
 local CUBIC_METERS_IN_LITER = 1/1000
+local CUBIC_CENTIMETERS_IN_ROBLOX = 28^3
+local CUBIC_METERS_IN_ROBLOX = CUBIC_CENTIMETERS_IN_ROBLOX/(100^3)
 
 local Liter = {}
 function Liter.toMilliliter(liter: Liter): Milliliter
@@ -77,6 +79,9 @@ function Liter.toCubicInch(liter: Liter): CubicInch
 end
 function Liter.toCubicMeter(liter: Liter): CubicInch
 	return liter * CUBIC_METERS_IN_LITER
+end
+function Liter.toRoblox(liter: Liter): number
+	return Liter.toCubicMeter(liter) / CUBIC_METERS_IN_ROBLOX
 end
 
 local Milliliter = {}
@@ -107,6 +112,9 @@ end
 function Milliliter.toCubicMeter(milliliter: Milliliter): CubicInch
 	return Liter.toCubicMeter(Milliliter.toLiter(milliliter))
 end
+function Milliliter.toRoblox(milliliter: Milliliter): number
+	return Liter.toRoblox(Milliliter.toLiter(milliliter))
+end
 
 local Kiloliter = {}
 function Kiloliter.toLiter(kiloliter: Kiloliter): Liter
@@ -136,6 +144,10 @@ end
 function Kiloliter.toCubicMeter(kiloliter: Kiloliter): CubicInch
 	return Liter.toCubicMeter(Kiloliter.toLiter(kiloliter))
 end
+function Kiloliter.toRoblox(kiloliter: Kiloliter): number
+	return Liter.toRoblox(Kiloliter.toLiter(kiloliter))
+end
+
 
 local Cup = {}
 function Cup.toLiter(cup: Cup): Liter
@@ -164,6 +176,9 @@ function Cup.toCubicInch(cup: Cup): CubicInch
 end
 function Cup.toCubicMeter(cup: Cup): CubicInch
 	return Liter.toCubicMeter(Cup.toLiter(cup))
+end
+function Cup.toRoblox(cup: Cup): number
+	return Liter.toRoblox(Cup.toLiter(cup))
 end
 
 local Pint = {}
@@ -194,6 +209,9 @@ end
 function Pint.toCubicMeter(pint: Pint): CubicMeter
 	return Liter.toCubicMeter(Pint.toLiter(pint))
 end
+function Pint.toRoblox(pint: Pint): number
+	return Liter.toRoblox(Pint.toLiter(pint))
+end
 
 local Quart = {}
 function Quart.toLiter(quart: Quart): Liter
@@ -222,6 +240,9 @@ function Quart.toCubicInch(quart: Quart): CubicInch
 end
 function Quart.toCubicMeter(quart: Quart): CubicMeter
 	return Liter.toCubicMeter(Quart.toLiter(quart))
+end
+function Quart.toRoblox(quart: Quart): number
+	return Liter.toRoblox(Quart.toLiter(quart))
 end
 
 local Gallon = {}
@@ -252,6 +273,9 @@ end
 function Gallon.toCubicMeter(gallon: Gallon): CubicMeter
 	return Liter.toCubicMeter(Gallon.toLiter(gallon))
 end
+function Gallon.toRoblox(gallon: Gallon): number
+	return Liter.toRoblox(Gallon.toLiter(gallon))
+end
 
 local CubicFeet = {}
 function CubicFeet.toLiter(cubicFeet: CubicFeet): Liter
@@ -280,6 +304,9 @@ function CubicFeet.toCubicInch(cubicFeet: CubicFeet): CubicInch
 end
 function CubicFeet.toCubicMeter(cubicFeet: CubicFeet): CubicMeter
 	return Liter.toCubicMeter(CubicFeet.toLiter(cubicFeet))
+end
+function CubicFeet.toRoblox(cubicFeet: CubicFeet): number
+	return Liter.toRoblox(CubicFeet.toLiter(cubicFeet))
 end
 
 local CubicInch = {}
@@ -310,6 +337,9 @@ end
 function CubicInch.toCubicMeter(cubicInch: CubicInch): CubicMeter
 	return Liter.toCubicMeter(CubicInch.toLiter(cubicInch))
 end
+function CubicInch.toRoblox(cubicInch: CubicInch): number
+	return Liter.toRoblox(CubicInch.toLiter(cubicInch))
+end
 
 local CubicMeter = {}
 function CubicMeter.toLiter(cubicMeter: CubicMeter): Liter
@@ -339,6 +369,41 @@ end
 function CubicMeter.toMilliliter(cubicMeter: CubicMeter): Milliliter
 	return Liter.toMilliliter(CubicMeter.toLiter(cubicMeter))
 end
+function CubicMeter.toRoblox(cubicMeter: CubicMeter): number
+	return Liter.toRoblox(CubicMeter.toLiter(cubicMeter))
+end
+
+local Roblox = {}
+function Roblox.toCubicMeter(roblox: number): CubicMeter
+	return roblox * CUBIC_METERS_IN_ROBLOX
+end
+function Roblox.toLiter(roblox: number): Liter
+	return CubicMeter.toLiter(Roblox.toCubicMeter(roblox))
+end
+function Roblox.toKiloliter(roblox: number): Kiloliter
+	return CubicMeter.toKiloliter(Roblox.toCubicMeter(roblox))
+end
+function Roblox.toCup(roblox: number): Cup
+	return CubicMeter.toCup(Roblox.toCubicMeter(roblox))
+end
+function Roblox.toPint(roblox: number): Pint
+	return CubicMeter.toPint(Roblox.toCubicMeter(roblox))
+end
+function Roblox.toQuart(roblox: number): Quart
+	return CubicMeter.toQuart(Roblox.toCubicMeter(roblox))
+end
+function Roblox.toGallon(roblox: number): Gallon
+	return CubicMeter.toGallon(Roblox.toCubicMeter(roblox))
+end
+function Roblox.toCubicFeet(roblox: number): CubicFeet
+	return CubicMeter.toCubicFeet(Roblox.toCubicMeter(roblox))
+end
+function Roblox.toCubicInch(roblox: number): CubicInch
+	return CubicMeter.toCubicInch(Roblox.toCubicMeter(roblox))
+end
+function Roblox.toMilliliter(roblox: number): Milliliter
+	return CubicMeter.toMilliliter(Roblox.toCubicMeter(roblox))
+end
 
 return {
 	Liter = Liter,
@@ -350,4 +415,5 @@ return {
 	Gallon = Gallon,
 	CubicFeet = CubicFeet,
 	CubicInch = CubicInch,
+	Roblox = Roblox,
 }

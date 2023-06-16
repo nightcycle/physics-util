@@ -22,6 +22,9 @@ end
 function GramPerCubicCentimeter.toGramPerMilliliter(gramPerCubicCentimeter: GramPerCubicCentimeter): GramPerMilliliter
 	return gramPerCubicCentimeter * GPM_IN_GPCC
 end
+function GramPerCubicCentimeter.toRoblox(gramPerCubicCentimeter: GramPerCubicCentimeter): number
+return gramPerCubicCentimeter
+end
 
 local GramPerMilliliter = {}
 function GramPerMilliliter.toGramPerCubicCentimeter(gramPerMilliliter: GramPerMilliliter): GramPerCubicCentimeter
@@ -29,6 +32,9 @@ function GramPerMilliliter.toGramPerCubicCentimeter(gramPerMilliliter: GramPerMi
 end
 function GramPerMilliliter.toKilogramsPerCubicMeter(gramPerCubicCentimeter: GramPerCubicCentimeter): KilogramsPerCubicMeter
 	return GramPerCubicCentimeter.toKilogramsPerCubicMeter(GramPerMilliliter.toGramPerCubicCentimeter(gramPerCubicCentimeter))
+end
+function GramPerMilliliter.toRoblox(gramPerCubicCentimeter: GramPerCubicCentimeter): number
+	return GramPerCubicCentimeter.toRoblox(GramPerMilliliter.toGramPerCubicCentimeter(gramPerCubicCentimeter))
 end
 
 local KilogramsPerCubicMeter = {}
@@ -38,9 +44,24 @@ end
 function KilogramsPerCubicMeter.toKilogramsPerCubicMeter(kilogramsPerCubicMeter: KilogramsPerCubicMeter): KilogramsPerCubicMeter
 	return GramPerCubicCentimeter.toKilogramsPerCubicMeter(KilogramsPerCubicMeter.toGramPerCubicCentimeter(kilogramsPerCubicMeter))
 end
+function KilogramsPerCubicMeter.toRoblox(kilogramsPerCubicMeter: KilogramsPerCubicMeter): number
+	return GramPerCubicCentimeter.toRoblox(KilogramsPerCubicMeter.toGramPerCubicCentimeter(kilogramsPerCubicMeter))
+end
+
+local Roblox = {}
+function Roblox.toGramPerCubicCentimeter(roblox: number): GramPerCubicCentimeter
+	return roblox
+end
+function Roblox.toKilogramsPerCubicMeter(roblox: number): KilogramsPerCubicMeter
+	return GramPerCubicCentimeter.toKilogramsPerCubicMeter(Roblox.toGramPerCubicCentimeter(roblox))
+end
+function Roblox.toGramPerMilliliter(roblox: number): GramPerMilliliter
+	return GramPerCubicCentimeter.toGramPerMilliliter(Roblox.toGramPerCubicCentimeter(roblox))
+end
 
 return {
 	GramPerCubicCentimeter = GramPerCubicCentimeter,
 	KilogramsPerCubicMeter = KilogramsPerCubicMeter,
 	GramPerMilliliter = GramPerMilliliter,
+	Roblox = Roblox,
 }
