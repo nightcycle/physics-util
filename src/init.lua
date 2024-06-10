@@ -1,4 +1,5 @@
 --!strict
+--!native
 local Conversions = require(script.Conversions)
 export type Newton = Conversions.Newton
 export type MetersPerSecondSquared = Conversions.MetersPerSecondSquared
